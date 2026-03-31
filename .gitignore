@@ -1,0 +1,8 @@
+node_modules/
+.venv/
+.cache/
+local-artifacts/
+questpdf/InvoicePoc/bin/
+questpdf/InvoicePoc/obj/
+output/
+.DS_Store

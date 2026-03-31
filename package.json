@@ -1,0 +1,21 @@
+{
+  "name": "invoice-renderer-pocs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "bootstrap:playwright": "playwright install chromium",
+    "render:html": "node scripts/render-html.mjs",
+    "pdf:playwright": "node scripts/render-playwright.mjs",
+    "pdf:puppeteer": "node scripts/render-puppeteer.mjs",
+    "pdf:react-pdf": "node scripts/render-react-pdf.mjs",
+    "pdf:pdfmake": "node scripts/render-pdfmake.mjs"
+  },
+  "dependencies": {
+    "@react-pdf/renderer": "^4.3.2",
+    "nunjucks": "^3.2.4",
+    "pdfmake": "^0.3.7",
+    "playwright": "^1.58.2",
+    "puppeteer": "^24.40.0",
+    "react": "^19.2.4"
+  }
+}

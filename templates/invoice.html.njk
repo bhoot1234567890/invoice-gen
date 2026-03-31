@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ invoice.invoiceNumber }} - {{ invoice.typeLabel }}</title>
+    <style>{{ css | safe }}</style>
+  </head>
+  <body>
+    <section class="page invoice-page">
+      <header class="header-row">
+        <div>
+          <h1 class="invoice-title">{{ invoice.typeLabel }}</h1>
+        </div>
+
+        <div class="meta-card">
+          <div class="meta-row">
+            <span class="meta-label">Invoice No</span>
+            <span class="meta-value">{{ invoice.invoiceNumber }}</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Date</span>
+            <span class="meta-value">{{ invoice.issueDate | format_date }}</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Due Date</span>
+            <span class="meta-value">{{ invoice.dueDateLabel }}</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="party-grid">
+        <article class="party-card">
+          <h2 class="section-label">From</h2>
+          <p class="party-name">{{ seller.name }}</p>
+          {% for line in seller.addressLines %}
+          <p class="party-line">{{ line }}</p>
+          {% endfor %}
+          <p class="party-contact">{{ seller.email }}</p>
+          {% if seller.phone %}
+          <p class="party-contact">{{ seller.phone }}</p>
+          {% endif %}
+          {% if seller.pan %}
+          <p class="party-contact">PAN: {{ seller.pan }}</p>
+          {% endif %}
+        </article>
+
+        <article class="party-card">
+          <h2 class="section-label">Bill To</h2>
+          <p class="party-name">{{ buyer.company }}</p>
+          {% if buyer.attention %}
+          <p class="party-line">{{ buyer.attention }}</p>
+          {% endif %}
+          {% for line in buyer.addressLines %}
+          <p class="party-line">{{ line }}</p>
+          {% endfor %}
+          <p class="party-contact">{{ buyer.email }}</p>
+        </article>
+      </section>
+
+      <table class="items" aria-label="Invoice line items">
+        <thead>
+          <tr>
+            <th style="width: 52%">Description</th>
+            <th style="width: 12%">Qty</th>
+            <th style="width: 18%">Rate</th>
+            <th style="width: 18%">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+          <tr>
+            <td class="description-cell">
+              <div class="item-title">{{ item.title }}</div>
+              <div class="item-subtitle">{{ item.subtitle }}</div>
+            </td>
+            <td class="qty-cell">{{ item.qty }}</td>
+            <td class="money-cell">{{ item.rate | format_money(invoice.currency) }}</td>
+            <td class="money-cell">{{ item.amount | format_money(invoice.currency) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <section class="summary-wrap">
+        <div class="summary-card">
+          <div class="summary-row">
+            <span class="summary-label">Subtotal</span>
+            <span class="summary-value">{{ summary.subtotal | format_money(invoice.currency) }}</span>
+          </div>
+          <div class="total-bar">
+            <span class="total-label">TOTAL</span>
+            <span class="total-value">{{ summary.total | format_money(invoice.currency) }}</span>
+          </div>
+          <p class="amount-words">Amount in Words: {{ summary.amountInWords }}</p>
+        </div>
+      </section>
+
+      <section class="panel centered-title">
+        <h2 class="section-label">Bank Details For Payment</h2>
+        <div class="bank-grid">
+          <div>
+            <div class="detail-item">
+              <div class="detail-label">Account Holder</div>
+              <div class="detail-value">{{ bankDetails.accountHolder }}</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Account Number</div>
+              <div class="detail-value">{{ bankDetails.accountNumber }}</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Bank Name</div>
+              <div class="detail-value">{{ bankDetails.bankName }}</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="detail-item">
+              <div class="detail-label">IFSC Code</div>
+              <div class="detail-value">{{ bankDetails.ifscCode }}</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">SWIFT Code</div>
+              <div class="detail-value">{{ bankDetails.swiftCode }}</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">UPI ID</div>
+              <div class="detail-value">{{ bankDetails.upiId }}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2 class="section-label">Payment Terms</h2>
+        <ul class="bullet-list">
+          {% for term in paymentTerms %}
+          <li>{{ term }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section class="panel">
+        <h2 class="section-label">Notes</h2>
+        <ul class="bullet-list">
+          {% for note in notes %}
+          <li>{{ note }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+    </section>
+
+    <section class="page note-page">
+      <p>{{ compliance.exportNote }}</p>
+    </section>
+
+    <section class="page generated-note-page">
+      <p>{{ compliance.generatedNote }}</p>
+    </section>
+  </body>
+</html>

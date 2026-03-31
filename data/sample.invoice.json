@@ -1,0 +1,72 @@
+{
+  "invoice": {
+    "typeLabel": "TAX INVOICE",
+    "invoiceNumber": "INV-2026-001",
+    "issueDate": "2026-01-13",
+    "dueDateLabel": "Net 15",
+    "currency": "USD"
+  },
+  "seller": {
+    "name": "Apex Ledger Studio",
+    "addressLines": [
+      "1200 Market Street",
+      "Suite 400",
+      "San Francisco, CA 94105",
+      "United States"
+    ],
+    "email": "billing@example.com",
+    "phone": "+1 555 010 2000",
+    "pan": "ABCDE1234F"
+  },
+  "buyer": {
+    "company": "Northwind Devices",
+    "attention": "Finance Operations",
+    "addressLines": [
+      "500 Innovation Drive",
+      "Austin, TX 78701",
+      "United States"
+    ],
+    "email": "ap@example.com"
+  },
+  "items": [
+    {
+      "title": "Embedded Systems Consulting Retainer",
+      "subtitle": "Project: Edge Device Platform",
+      "qty": 1,
+      "rate": "2400.00",
+      "amount": "2400.00"
+    },
+    {
+      "title": "Prototype Hardware Reimbursement",
+      "subtitle": "Sensors, evaluation boards, and accessories",
+      "qty": 1,
+      "rate": "350.00",
+      "amount": "350.00"
+    }
+  ],
+  "summary": {
+    "subtotal": "2750.00",
+    "total": "2750.00",
+    "amountInWords": "Two Thousand Seven Hundred Fifty USD Only"
+  },
+  "bankDetails": {
+    "accountHolder": "Apex Ledger Studio LLC",
+    "accountNumber": "000123456789",
+    "bankName": "Example Bank",
+    "ifscCode": "EXAM0001234",
+    "swiftCode": "EXAMUS33",
+    "upiId": "apexledger@upi"
+  },
+  "paymentTerms": [
+    "Payment due within 15 days of the invoice date"
+  ],
+  "notes": [
+    "Thank you for your business.",
+    "Please include the invoice number in the payment reference.",
+    "Example data only. Replace all values before production use."
+  ],
+  "compliance": {
+    "exportNote": "Services exported from India under GST provisions.",
+    "generatedNote": "This is a computer-generated invoice from Apex Ledger Studio"
+  }
+}
